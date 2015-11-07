@@ -8,16 +8,20 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "ubuntu/trusty64"
   
   config.vm.provision "shell", inline: "echo Hello"
+  
+  
 
   config.vm.define "web" do |web|
     web.vm.hostname = "apache"
     web.vm.provision :shell, path: "bootstrap.sh"
-    web.vm.network "private_network", type: "dhcp"
+    web.vm.network "private_network", ip: "10.20.1.2"
+    web.vm.provision :hosts
     web.vm.network "forwarded_port", guest: 80, host: 8080
   end
 
   config.vm.define "db" do |db|
     db.vm.hostname = "mysql"
-    db.vm.network "private_network", type: "dhcp"
+    db.vm.network "private_network", ip: "10.20.1.3"
+    db.vm.provision :hosts
   end
 end
