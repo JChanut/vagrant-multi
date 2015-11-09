@@ -34,8 +34,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
   
   if Vagrant.has_plugin?("vagrant-proxyconf")
-    config.proxy.http     = "http://#{`hostname`[0..-2]}:3128"
-    config.proxy.https    = "http://#{`hostname`[0..-2]}:3128"
-    config.proxy.no_proxy = "localhost,127.0.0.1,#{`hostname`[0..-2]}"
+    config.proxy.http     = "http://" + ip_address + ":3128"
+    config.proxy.https    = "http://" + ip_address + ":3128"
+    config.proxy.no_proxy = "localhost,127.0.0.1,.local,web,db," + ip_address
   end
 end
