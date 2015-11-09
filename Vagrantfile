@@ -10,9 +10,7 @@ ip_address = Socket.ip_address_list.find { |ai| ai.ipv4? && !ai.ipv4_loopback? }
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "ubuntu/trusty64"
-  
-  config.vm.provision "shell", inline: "echo Hello"
-  
+    
   config.vm.define "web" do |web|
     web.vm.hostname = "web.ddsim.local"
     web.vm.provision :shell, path: "bootstrap.sh"
